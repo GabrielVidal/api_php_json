@@ -42,6 +42,41 @@
 				}
 		}
 
+
+		public function consultarSexoIdade($sexo, $idade)
+		{
+			$sql = "SELECT * FROM usuarios WHERE sexo = '$sexo' AND idade >= '$idade' ";
+
+			$resultado = mysqli_query($this->conexao->getCon(), $sql);
+
+			if(mysqli_num_rows($resultado) > 0)
+			{
+				return $resultado;
+			}
+			
+				else{
+					return false;
+				}
+		}
+
+
+		public function consultarEndereco($codigo)
+		{
+			$sql = "SELECT e.idUsuario, e.logradouro, e.cidade, e.estado, e.pais, u.id, u.nome, u.idade, u.sobrenome, u.sexo FROM endereco AS e INNER JOIN usuarios AS u ON (e.idUsuario = u.id) WHERE u.id = '$codigo'";
+
+			$resultado = mysqli_query($this->conexao->getCon(), $sql);
+
+			if(mysqli_num_rows($resultado) > 0)
+			{
+				return $resultado;
+			}
+			
+				else{
+					return false;
+				}
+		}
+
+
 	}
 
  ?>
